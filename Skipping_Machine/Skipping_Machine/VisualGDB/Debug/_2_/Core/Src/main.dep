@@ -38,21 +38,26 @@ VisualGDB/Debug/_2_/Core/Src/main.o: \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdbool.h \
- C:/SysGCC/arm-eabi/arm-none-eabi/include/stdio.h \
+ ../../Core/Inc/pid.h ../../Core/Inc/main.h \
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/math.h \
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/reent.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/_ansi.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/newlib.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/config.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/ieeefp.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/cdefs.h \
- C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdarg.h \
- C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/reent.h \
- C:/SysGCC/arm-eabi/arm-none-eabi/include/_ansi.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_types.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/_types.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/lock.h \
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/_ansi.h \
+ C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdbool.h \
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/stdio.h \
+ C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdarg.h \
  C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/stdio.h \
- ../../Core/Inc/pid.h ../../Core/Inc/main.h
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/string.h \
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_locale.h \
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/strings.h \
+ C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/string.h
 ../../Core/Inc/main.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../../Core/Inc/stm32f4xx_hal_conf.h:
@@ -92,19 +97,24 @@ C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stddef.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdbool.h:
-C:/SysGCC/arm-eabi/arm-none-eabi/include/stdio.h:
+../../Core/Inc/pid.h:
+../../Core/Inc/main.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/math.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/reent.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/_ansi.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/newlib.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/config.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/ieeefp.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/cdefs.h:
-C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdarg.h:
-C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/reent.h:
-C:/SysGCC/arm-eabi/arm-none-eabi/include/_ansi.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_types.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/_types.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/lock.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/_ansi.h:
+C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdbool.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/stdio.h:
+C:/SysGCC/arm-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stdarg.h:
 C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/stdio.h:
-../../Core/Inc/pid.h:
-../../Core/Inc/main.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/string.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_locale.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/strings.h:
+C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/string.h:
