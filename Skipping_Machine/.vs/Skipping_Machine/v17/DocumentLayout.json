@@ -9,10 +9,10 @@
       "AbsoluteMoniker": "D:0:0:{EB16A0CA-BE3F-07C2-2508-C0C2EA4A2C79}|Skipping_Machine\\Skipping_Machine.vcxproj|D:\\STM32_Projects\\Skipping_Machine\\Core\\Src\\pid.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB16A0CA-BE3F-07C2-2508-C0C2EA4A2C79}|Skipping_Machine\\Skipping_Machine.vcxproj|D:\\STM32_Projects\\Skipping_Machine\\Core\\Inc\\pid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{EB16A0CA-BE3F-07C2-2508-C0C2EA4A2C79}|Skipping_Machine\\Skipping_Machine.vcxproj|D:\\STM32_Projects\\Skipping_Machine\\Core\\Inc\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB16A0CA-BE3F-07C2-2508-C0C2EA4A2C79}|Skipping_Machine\\Skipping_Machine.vcxproj|D:\\STM32_Projects\\Skipping_Machine\\Core\\Inc\\main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{EB16A0CA-BE3F-07C2-2508-C0C2EA4A2C79}|Skipping_Machine\\Skipping_Machine.vcxproj|D:\\STM32_Projects\\Skipping_Machine\\Core\\Inc\\pid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +22,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "main.c",
+              "DocumentMoniker": "D:\\STM32_Projects\\Skipping_Machine\\Core\\Src\\main.c",
+              "RelativeDocumentMoniker": "..\\Core\\Src\\main.c",
+              "ToolTip": "D:\\STM32_Projects\\Skipping_Machine\\Core\\Src\\main.c",
+              "RelativeToolTip": "..\\Core\\Src\\main.c",
+              "ViewState": "AgIAAH8CAAAAAAAAAAAewJYCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-05-23T13:03:58.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "main.h",
               "DocumentMoniker": "D:\\STM32_Projects\\Skipping_Machine\\Core\\Inc\\main.h",
               "RelativeDocumentMoniker": "..\\Core\\Inc\\main.h",
@@ -39,7 +56,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "pid.h",
               "DocumentMoniker": "D:\\STM32_Projects\\Skipping_Machine\\Core\\Inc\\pid.h",
               "RelativeDocumentMoniker": "..\\Core\\Inc\\pid.h",
@@ -58,22 +75,9 @@
               "RelativeDocumentMoniker": "..\\Core\\Src\\pid.c",
               "ToolTip": "D:\\STM32_Projects\\Skipping_Machine\\Core\\Src\\pid.c",
               "RelativeToolTip": "..\\Core\\Src\\pid.c",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2025-05-23T13:35:36.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "main.c",
-              "DocumentMoniker": "D:\\STM32_Projects\\Skipping_Machine\\Core\\Src\\main.c",
-              "RelativeDocumentMoniker": "..\\Core\\Src\\main.c",
-              "ToolTip": "D:\\STM32_Projects\\Skipping_Machine\\Core\\Src\\main.c",
-              "RelativeToolTip": "..\\Core\\Src\\main.c",
-              "ViewState": "AgIAAJAAAAAAAAAAAAAEwJgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-05-23T13:03:58.485Z",
               "EditorCaption": ""
             }
           ]

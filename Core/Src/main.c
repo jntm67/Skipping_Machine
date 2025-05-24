@@ -153,10 +153,13 @@ int main(void)
 
 	HAL_TIM_Base_Start_IT(&htim4);
 
-	motor.target = 120.0f;
+	motor.target = 90.0f;
 	myprintf(&huart2, "t1.txt=\"%.2fRPM\"\xff\xff\xff", motor.target);
 
 	motor.pid_mode = DELTA_PID;
+	motor.p = 6;
+	motor.i = 1.5;
+	motor.d = 0;
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -173,11 +176,13 @@ int main(void)
 			motor.error[0] = 0;
 			motor.error[1] = 0;
 			motor.error[2] = 0;
+			motor.out = 0;
 			HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 			while (execute) {
 			}
 		} else {
-			HAL_GPIO_WritePin(STBY.port, STBY.pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(AIN1.port, AIN1.pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(AIN2.port, AIN2.pin, GPIO_PIN_RESET);
 			HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 			while (!execute) {
 			}
@@ -350,7 +355,7 @@ static void MX_TIM3_Init(void)
   sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
   sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
   sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
-  sConfig.IC2Filter = 2;
+  sConfig.IC2Filter = 10;
   if (HAL_TIM_Encoder_Init(&htim3, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -504,6 +509,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
@@ -515,6 +521,12 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOF, GPIO_PIN_14, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PA1 PA2 */
   GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -525,7 +537,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : PB2 */
   GPIO_InitStruct.Pin = GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PF11 */
@@ -545,7 +557,7 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI2_IRQn, 4, 0);
   HAL_NVIC_EnableIRQ(EXTI2_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 4, 0);
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
@@ -589,20 +601,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		uint32_t cnt_now = __HAL_TIM_GET_COUNTER(&htim3);
 		int32_t delta = (int32_t)(cnt_now - cnt_prev);
 		cnt_prev = cnt_now;
-		float speed_rpm = delta *speed_factor / (-3230.0) * 158.87;
+		float speed_rpm = delta * speed_factor / (-1850.0) * 89.42;
 		motor.now = speed_rpm;
 		if (count >= 400) {
 			cnt_now2 = cnt_now;
 			int32_t delta2 = (int32_t)(cnt_now2 - cnt_prev2);
 			if (delta2 > (1 << 15)) {
 				delta2 -= (1 << 16);
+			} else if (delta2 < (-(1 << 15))) {
+				delta2 += (1 << 16);
 			}
 			cnt_prev2 = cnt_now2;
-			float speed_rpm2 = delta2 * speed_factor / 400 / (-3230.0) * 158.87;
+			float speed_rpm2 = delta2 * speed_factor / 400 / (-1850.0) * 89.42;
 			myprintf(&huart2, "t3.txt=\"%.2fRPM\"\xff\xff\xff", speed_rpm2);
 			count = 0;
+		} else {
+			count++;
 		}
-		
 		pid_cal(&motor);
 		if (motor.out > max_v) {
 			motor.out = max_v;
@@ -610,11 +625,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			motor.out = -max_v;
 		}
 		update_output(motor.out);
-		count++;
 	}
 }
 void update_output(float out) {
-	if (fabs(out) < 150) {
+	if (fabs(out) > 150) {
 		out = 150 * out / fabs(out);
 	}
 	float signed_new_duty = out / max_v;
@@ -633,15 +647,29 @@ void update_output(float out) {
 	__HAL_TIM_SetCompare(&htim2, TIM_CHANNEL_1, (uint32_t)(fabs(signed_new_duty) * __HAL_TIM_GET_AUTORELOAD(&htim2)));
 }
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	return;
 	if (GPIO_Pin == GPIO_PIN_2) {
 		// PB2 rising edge: increment target
-		motor.target++;
+		if (execute) {
+			return;
+		}
+		if (HAL_GPIO_ReadPin(Rotate_Encoder_B.port, Rotate_Encoder_B.pin) == GPIO_PIN_RESET) {
+			motor.target += 1.0f;
+		} else {
+			motor.target -= 1.0f;
+			if (motor.target < 50.0f) {
+				motor.target = 130.0f;
+			}
+		}
 		myprintf(&huart2, "t1.txt=\"%.2fRPM\"\xff\xff\xff", motor.target);
 	} else if (GPIO_Pin == GPIO_PIN_11) {
-		// PF11 rising edge: decrement target
-		motor.target--;
-		myprintf(&huart2, "t1.txt=\"%.2fRPM\"\xff\xff\xff", motor.target);
+		return;
+	} else if (GPIO_Pin == GPIO_PIN_13) {
+		static int cnt = 0;
+		cnt++;
+		if (cnt == 5) {
+			execute = !execute;
+			cnt = 0;
+		}
 	}
 }
 void myprintf(UART_HandleTypeDef *huart, const char *format, ...) {
